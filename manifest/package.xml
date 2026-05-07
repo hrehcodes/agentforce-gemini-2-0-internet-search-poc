@@ -2,7 +2,12 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>Gemini_API_Call</members>
+        <members>Gemini_API_Call_Test</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Gemini_API_EC</members>
+        <name>ExternalCredential</name>
     </types>
     <types>
         <members>Gemini_2_0_API_Call_Flow</members>
@@ -15,6 +20,14 @@
     <types>
         <members>Gemini_2_0_Answer_Formatter</members>
         <name>GenAiPromptTemplate</name>
+    </types>
+    <types>
+        <members>Gemini_API</members>
+        <name>NamedCredential</name>
+    </types>
+    <types>
+        <members>Gemini_API_Access</members>
+        <name>PermissionSet</name>
     </types>
     <types>
         <members>Gemini_API</members>

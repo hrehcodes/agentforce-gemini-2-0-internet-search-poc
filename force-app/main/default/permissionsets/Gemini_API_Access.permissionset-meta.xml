@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>Gemini_API_Call</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Allows users and Agentforce running users to invoke the Gemini API action through the named credential.</description>
+    <externalCredentialPrincipalAccesses>
+        <enabled>true</enabled>
+        <externalCredentialPrincipal>Gemini_API_EC-API_Key</externalCredentialPrincipal>
+    </externalCredentialPrincipalAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Gemini_2_0_API_Call_Flow</flow>
+    </flowAccesses>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Gemini API Access</label>
+</PermissionSet>

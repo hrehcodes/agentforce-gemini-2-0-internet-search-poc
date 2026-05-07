@@ -49,7 +49,7 @@ Invocable methods and key callouts:
 - Apex endpoints/callouts observed: `https://generativelanguage.googleapis.com/v1beta/models/`
 
 No credential secret values were included in the retrieved metadata. Any API keys or named-principal secrets must be configured in the target org after deployment.
-- The retrieved package contained a hardcoded Gemini flow variable value; this repo replaces it with `REPLACE_WITH_GEMINI_API_KEY` before publishing.
+- The retrieved package contained a hardcoded Gemini flow variable value; the Flow variable has been removed and credentials are now handled through External Credential setup.
 
 ## Prerequisites
 - Salesforce org with Metadata API support and Salesforce CLI access.
@@ -94,3 +94,26 @@ sf project deploy start --manifest manifest/package.xml --target-org <target-org
 - Keep generated secrets, local org auth files, `.sf`, `.sfdx`, and deployment output out of source control.
 - Treat prompt templates and Agentforce action descriptions as production behavior, not just documentation.
 - For production hardening, prefer Named Credential and External Credential patterns over passing API keys directly through Flow variables.
+
+## Hardening Update
+Security and reliability improvements applied after migration:
+- Gemini API keys are no longer Flow or Apex inputs; use the Gemini_API named credential and Gemini_API_EC external credential.
+- The Flow no longer runs in SystemModeWithoutSharing.
+- Apex now allowlists Gemini models, clamps generation settings, retries transient failures, and sanitizes provider errors.
+
+## Known Limitations
+- Confirm the target org supports the x-goog-api-key header pattern for the configured External Credential.
+- This remains a POC until customer-specific safety, grounding, and quota requirements are reviewed.
+
+## Test Commands
+Validate metadata and run relevant tests after authenticating to a target org:
+
+```bash
+sf project deploy start --dry-run --manifest manifest/package.xml --target-org <target-org> --wait 30
+sf apex run test --class-names Gemini_API_Call_Test --target-org <target-org> --result-format human --wait 10
+```
+
+## Troubleshooting
+- If an Agentforce action cannot authenticate, confirm the named principal secret is configured in the target org and the running user has the included permission set.
+- If a prompt action returns unsupported or unsafe content, review the prompt template safety rules and test with malicious retrieved content.
+- If deployment fails on Agentforce metadata, deploy supporting objects, Apex, Flows, credentials, and prompt templates first, then wire/publish the target agent in Builder.
