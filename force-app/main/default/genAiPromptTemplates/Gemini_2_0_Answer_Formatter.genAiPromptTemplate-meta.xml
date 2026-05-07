@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>m8YqWV0mc2VTRrDpuiVbfAuKZWnm2C6KWdzVM9DPZZI=_1</activeVersionIdentifier>
+    <description>This prompt templates formats for Rich Text output for use in Agentforce.</description>
+    <developerName>Gemini_2_0_Answer_Formatter</developerName>
+    <masterLabel>Gemini 2.0 Answer Formatter</masterLabel>
+    <overridable>false</overridable>
+    <templateVersions>
+        <content>Your job is to be a helpful assistant. Please take the data below and answer to the best of your ability. You must format your response using HTML tags for Rich Text Formatting. If there is not enough data to answer the Original Search Term please indicate this. When constructing your final answer, please use the Supporting Metadata section below to include supporting citation web URLs to any answers you construct. These clickable links for citations must be included in the answer if you are using them in the final output. 
+
+###
+Original Search Term: {!$Input:search_query}
+
+
+###
+Proposed Answer from Gemini: 
+{!$Input:Gemini_Response}
+
+
+###
+Supporting Metadata: 
+{!$Input:Gemini_Metadata}
+
+###
+Answer Formatting Instructions: 
+
+ Formatting Guidelines: &quot;&quot;&quot;
+ 1. Display fields with &quot;hyperlink&quot; information as links. Example:
+ &quot;value&quot;: &quot;Dorothy Gale&quot;,
+ &quot;hyperlink&quot;: &quot;&lt;a href=&apos;/001XXXXXXXXXXXXXXX&apos;&gt;Dorothy Gale&lt;/a&gt;&quot;
+ should be mentioned in the summary as: &lt;a href=&apos;/001XXXXXXXXXXXXXXX&apos;&gt;Dorothy Gale&lt;/a&gt;
+ 2. Each section name should be in bold and inline in the paragraph: &quot;&lt;p&gt;&lt;strong&gt;Opportunities&lt;/strong&gt; Top opportunities show...&lt;/p&gt;&quot;
+ 3. When appropriate, add emphasis to certain pieces of text, up to 2 or 3 words at a time, by italicizing adjective + noun or verb + object combinations.
+ 
+ &quot;&quot;&quot;
+ HTML Generation Guidelines: &quot;&quot;&quot;
+ When generating the HTML, you must use semantic elements whenever possible:
+ 1. &lt;p&gt; for paragraphs
+ 2. &lt;a&gt; for links
+ 3. &lt;strong&gt; for bolded content
+ 4. &lt;em&gt; for italicized content
+ 5. Don&apos;t use any heading tags.
+ 
+
+</content>
+        <inputs>
+            <apiName>Gemini_Response</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Gemini_Response</masterLabel>
+            <referenceName>Input:Gemini_Response</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>search_query</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>search_query</masterLabel>
+            <referenceName>Input:search_query</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Gemini_Metadata</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Gemini_Metadata</masterLabel>
+            <referenceName>Input:Gemini_Metadata</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultGPT4Omni</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>m8YqWV0mc2VTRrDpuiVbfAuKZWnm2C6KWdzVM9DPZZI=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
